@@ -15,6 +15,9 @@ IServiceCollection serviceCollection = builder.Services.AddDbContext<db>(options
 
 builder.Services.AddControllers();
 builder.Services.AddScoped<Ijobdetails, jobdetailService>();
+builder.Services.AddScoped<Iemployees, employeeService>();
+builder.Services.AddScoped<Ileave, LeaveService>();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
