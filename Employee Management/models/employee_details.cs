@@ -15,6 +15,8 @@ namespace Employee_Management.models
         public string l_name { get; set; }
         public string gender { get; set; }
         public int age { get; set; }
+        public int total_casual_leaves { get; set; }
+        public int total_wellness_leaves { get; set; }
         public string e_mail { get; set; }
         public Int64 mobile { get; set; }
     }

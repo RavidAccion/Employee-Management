@@ -31,7 +31,7 @@ namespace Employee_Management.Controllers
         public IActionResult applyleave(employee_leave_detaisl data)
             
         {
-            if (data.leave_type == 1 && data.no_of_days > 2)
+           if (data.leave_type == 1 && data.no_of_days > 2)
             {
 
              var error= "You Can't Apply For Wellness Leave More Than 2 days";
@@ -39,27 +39,33 @@ namespace Employee_Management.Controllers
 
             }
             else {
-                var DatabyID = _leavData.GetLeavebyid(data.emp_id);
+                var DatabyID = _leavData.Getbyid(data.emp_id);
                 if (data.leave_type == 1)
                 {
-                    data.rem_wellness = DatabyID.rem_wellness - data.no_of_days;
+                    data.rem_wellness = DatabyID.total_wellness_leaves - data.no_of_days;
+                    DatabyID.total_wellness_leaves = data.rem_casual;
+                    _leavData.Editleaves(DatabyID);
                 }
                 else
                 {
-                    data.rem_wellness = DatabyID.rem_wellness;
+                    data.rem_wellness = DatabyID.total_wellness_leaves;
                 }
                 if (data.leave_type == 2)
                 {
-                    data.rem_casual = DatabyID.rem_casual - data.no_of_days;
+                    data.rem_casual = DatabyID.total_casual_leaves - data.no_of_days;
+                    DatabyID.total_casual_leaves = data.rem_casual;
+                    _leavData.Editleaves(DatabyID);
                 }
                 else
                 {
-                    data.rem_casual = DatabyID.rem_casual;
+                    data.rem_casual = DatabyID.total_casual_leaves;
                 }
-                _leavData.applyleave(data);
-                return Created("/" + data, data);
+             
             }
-            
+
+            _leavData.applyleave(data);
+            return Created("/" + data, data);
+
         }
 
         [HttpGet]
