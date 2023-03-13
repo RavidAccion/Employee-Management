@@ -16,6 +16,7 @@ namespace Employee_Management.data
         public DbSet<employee_details> employee_details { get; set; }
         public DbSet<leavesModel> Leave { get; set; }
         public DbSet<employee_leave_detaisl> employee_leave_detaisl { get; set; }
+        public DbSet<leaveResultset> leaveResultset { get; set; }
 
     }
 

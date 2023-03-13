@@ -15,8 +15,9 @@ namespace Employee_Management.Interface
         leavesModel GetLeave(int Id);
         employee_leave_detaisl GetLeavebyid(int emp_id);
 
-        employee_details Getbyid(int emp_id);
+        leaveResultset Getbyid(int data, employee_leave_detaisl details);
 
-        employee_details Editleaves(employee_details data);
+        employee_details Editleaves(employee_leave_detaisl data);
+      
     }
 }

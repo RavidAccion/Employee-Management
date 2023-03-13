@@ -18,7 +18,7 @@ namespace Employee_Management.Controllers
 
 
         [HttpPost]
-        [Route("createProduct")]
+        [Route("create")]
         public IActionResult Add(Job_Details job)
 
         {

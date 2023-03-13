@@ -29,42 +29,32 @@ namespace Employee_Management.Controllers
         [HttpPost]
         [Route("applyleave")]
         public IActionResult applyleave(employee_leave_detaisl data)
-            
+           
         {
-           if (data.leave_type == 1 && data.no_of_days > 2)
+            var details = data;
+          /*  if (details.leave_type == 1 && details.no_of_days > 2)
             {
 
-             var error= "You Can't Apply For Wellness Leave More Than 2 days";
-                return BadRequest(error);
+                var error = "You Can't Apply For Wellness Leave More Than 2 days";
+                return BadRequest (error);
 
             }
-            else {
-                var DatabyID = _leavData.Getbyid(data.emp_id);
-                if (data.leave_type == 1)
-                {
-                    data.rem_wellness = DatabyID.total_wellness_leaves - data.no_of_days;
-                    DatabyID.total_wellness_leaves = data.rem_casual;
-                    _leavData.Editleaves(DatabyID);
-                }
-                else
-                {
-                    data.rem_wellness = DatabyID.total_wellness_leaves;
-                }
-                if (data.leave_type == 2)
-                {
-                    data.rem_casual = DatabyID.total_casual_leaves - data.no_of_days;
-                    DatabyID.total_casual_leaves = data.rem_casual;
-                    _leavData.Editleaves(DatabyID);
-                }
-                else
-                {
-                    data.rem_casual = DatabyID.total_casual_leaves;
-                }
-             
+            else {*/
+            var result =    _leavData.Getbyid(data.emp_id, details);
+
+            if(result.error != null)
+            {
+                return BadRequest(result);
+            }
+            else
+            {
+                _leavData.Editleaves(data);
+                _leavData.applyleave(data);
+
+                return Created("/" + data, data);
             }
 
-            _leavData.applyleave(data);
-            return Created("/" + data, data);
+          
 
         }
 
