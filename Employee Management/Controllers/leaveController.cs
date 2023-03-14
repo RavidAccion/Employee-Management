@@ -32,14 +32,7 @@ namespace Employee_Management.Controllers
            
         {
             var details = data;
-          /*  if (details.leave_type == 1 && details.no_of_days > 2)
-            {
-
-                var error = "You Can't Apply For Wellness Leave More Than 2 days";
-                return BadRequest (error);
-
-            }
-            else {*/
+       
             var result =    _leavData.Getbyid(data.emp_id, details);
 
             if(result.error != null)
@@ -51,7 +44,7 @@ namespace Employee_Management.Controllers
                 _leavData.Editleaves(data);
                 _leavData.applyleave(data);
 
-                return Created("/" + data, data);
+                return Ok(data);
             }
 
           
@@ -67,7 +60,7 @@ namespace Employee_Management.Controllers
         }
 
         [HttpGet]
-        [Route("GetleaveData")]
+        [Route("GetAppliedLeavedatas")]
         public IActionResult GetleaveDatas()
         {
             var data = _leavData.GetleaveDatas();

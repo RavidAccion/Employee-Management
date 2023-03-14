@@ -13,5 +13,7 @@ namespace Employee_Management.models
         public int rem_casual { get; set; }
         virtual public int no_of_days { get; set; }
         public string reason {  get; set; }
+
+        public DateTime added_date { get; set; }
     }
 }

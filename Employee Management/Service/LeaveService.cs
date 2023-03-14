@@ -12,6 +12,9 @@ namespace Employee_Management.Service
         {
             _dbContext = dbContext;
         }
+
+
+        //method to add leave type in leave table
         public leavesModel Add(leavesModel data)
         {
             _dbContext.Leave.Add(data);
@@ -22,18 +25,21 @@ namespace Employee_Management.Service
      
 
       
-
+        //method to get the list of leaves in leave table
         public List<leavesModel> Getleavelist()
         {
            return  _dbContext.Leave.ToList();
         }
 
+
+        //to get the list of datas in employee leave details table
         public List<employee_leave_detaisl> GetleaveDatas()
         {
             return _dbContext.employee_leave_detaisl.ToList();
         }
 
         
+        //method to get leaves from leave table by id
         public leavesModel GetLeave(int Id)
         {
             var leave = _dbContext.Leave.Find(Id);
@@ -41,6 +47,8 @@ namespace Employee_Management.Service
             return leave;
         }
 
+
+        //to get data from employee leave details by id
         public employee_leave_detaisl GetLeavebyid(int emp_id)
         {
             var leave = _dbContext.employee_leave_detaisl.Find(emp_id);
@@ -50,6 +58,8 @@ namespace Employee_Management.Service
 
         }
 
+
+        //method to create leave in employee leave details table
         public employee_leave_detaisl applyleave(employee_leave_detaisl data)
         {
 
@@ -60,14 +70,13 @@ namespace Employee_Management.Service
             return data;
         }
 
+
+        //method to grt the data from employee id and performs logic with Api datas and table datas
         public leaveResultset Getbyid(int emp_id, employee_leave_detaisl details)
 
         {
             var result = new leaveResultset();
             var data = _dbContext.employee_details.Find(emp_id );
-
-          
-
             if (details.leave_type == 1 && details.no_of_days > 2)
             {
                if(data.total_wellness_leaves == 0)
@@ -80,13 +89,10 @@ namespace Employee_Management.Service
                     var error = "You Can't Apply For Wellness Leave More Than 2 days";
                     result.error = error;
                     result.status = false;
-                }
-
-                
-            }
+                }               
+           }
             else
             {
-
                 if (details.leave_type == 1)
                 {
                     if(data.total_wellness_leaves != 0)
@@ -103,9 +109,6 @@ namespace Employee_Management.Service
                         result.error = error;
                         result.status = false;
                     }
-                 
-
-
                 }
                 else
                 {
@@ -129,7 +132,6 @@ namespace Employee_Management.Service
                         result.error = error;
                         result.status = false;
                     }
-                 
 
                 }
                 else
@@ -144,6 +146,7 @@ namespace Employee_Management.Service
 
         }
 
+        //method to edit the leave counts in employee leave details table
          employee_details Ileave.Editleaves(employee_leave_detaisl data)
         {
             var existingdata = _dbContext.employee_details.Find(data.emp_id);
