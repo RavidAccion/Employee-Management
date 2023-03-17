@@ -1,5 +1,5 @@
 ﻿using Employee_Management.Interface;
-using Employee_Management.models;
+using EmployeeModel;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Employee_Management.Controllers
@@ -18,7 +18,7 @@ namespace Employee_Management.Controllers
 
         [HttpPost]
         [Route("create")]
-        public IActionResult Add(employee_details emp)
+        public IActionResult Add(EmployeeDetails emp)
 
         {
             _empData.Add(emp);
@@ -33,6 +33,19 @@ namespace Employee_Management.Controllers
         {
             var data = _empData.Get();
             return Ok(data);
+        }
+
+        [HttpGet]
+        [Route("getemployeeID/{emp_id}")]
+        public IActionResult GetLeavedatabyid(int emp_id)
+        {
+            var DatabyID = _empData.Getemployee(emp_id);
+            if (DatabyID != null)
+            {
+                return Ok(DatabyID);
+            }
+
+            return NotFound($"Employeewith Id: {emp_id} was not found");
         }
 
     }

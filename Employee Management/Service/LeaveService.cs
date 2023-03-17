@@ -1,21 +1,21 @@
 ﻿using Employee_Management.data;
 using Employee_Management.Interface;
-using Employee_Management.models;
+using EmployeeModel;
 using System.Reflection.Metadata.Ecma335;
 
 namespace Employee_Management.Service
 {
     public class LeaveService : Ileave
     {
-        private readonly db _dbContext;
-        public LeaveService(db dbContext)
+        private readonly DataBase _dbContext;
+        public LeaveService(DataBase dbContext)
         {
             _dbContext = dbContext;
         }
 
 
         //method to add leave type in leave table
-        public leavesModel Add(leavesModel data)
+        public LeavesModel Add(LeavesModel data)
         {
             _dbContext.Leave.Add(data);
             _dbContext.SaveChanges();
@@ -26,21 +26,21 @@ namespace Employee_Management.Service
 
       
         //method to get the list of leaves in leave table
-        public List<leavesModel> Getleavelist()
+        public List<LeavesModel> Getleavelist()
         {
            return  _dbContext.Leave.ToList();
         }
 
 
         //to get the list of datas in employee leave details table
-        public List<employee_leave_detaisl> GetleaveDatas()
+        public List<EmployeeLeaveDetails> GetleaveDatas()
         {
             return _dbContext.employee_leave_detaisl.ToList();
         }
 
         
         //method to get leaves from leave table by id
-        public leavesModel GetLeave(int Id)
+        public LeavesModel GetLeave(int Id)
         {
             var leave = _dbContext.Leave.Find(Id);
 
@@ -49,7 +49,7 @@ namespace Employee_Management.Service
 
 
         //to get data from employee leave details by id
-        public employee_leave_detaisl GetLeavebyid(int emp_id)
+        public EmployeeLeaveDetails GetLeavebyid(int emp_id)
         {
             var leave = _dbContext.employee_leave_detaisl.Find(emp_id);
 
@@ -60,7 +60,7 @@ namespace Employee_Management.Service
 
 
         //method to create leave in employee leave details table
-        public employee_leave_detaisl applyleave(employee_leave_detaisl data)
+        public EmployeeLeaveDetails applyleave(EmployeeLeaveDetails data)
         {
 
 
@@ -72,16 +72,16 @@ namespace Employee_Management.Service
 
 
         //method to grt the data from employee id and performs logic with Api datas and table datas
-        public leaveResultset Getbyid(int emp_id, employee_leave_detaisl details)
+        public LeaveResultset Getbyid(int emp_id, EmployeeLeaveDetails details)
 
         {
-            var result = new leaveResultset();
+            var result = new LeaveResultset();
             var data = _dbContext.employee_details.Find(emp_id );
             if (details.leave_type == 1 && details.no_of_days > 2)
             {
                if(data.total_wellness_leaves == 0)
                 {
-                    var error = "You Dont have Any Leaves";
+                    var error = "You Dont have Any Casual Leaves";
                     result.error = error;
                     result.status = false;
                 }
@@ -147,7 +147,7 @@ namespace Employee_Management.Service
         }
 
         //method to edit the leave counts in employee leave details table
-         employee_details Ileave.Editleaves(employee_leave_detaisl data)
+         EmployeeDetails Ileave.Editleaves(EmployeeLeaveDetails data)
         {
             var existingdata = _dbContext.employee_details.Find(data.emp_id);
             if (existingdata != null)

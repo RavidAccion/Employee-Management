@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-IServiceCollection serviceCollection = builder.Services.AddDbContext<db>(options =>
+IServiceCollection serviceCollection = builder.Services.AddDbContext<DataBase>(options =>
 {
     options.UseSqlServer(
         builder.Configuration.GetConnectionString("DefaultCS")
@@ -17,6 +17,7 @@ builder.Services.AddControllers();
 builder.Services.AddScoped<Ijobdetails, jobdetailService>();
 builder.Services.AddScoped<Iemployees, employeeService>();
 builder.Services.AddScoped<Ileave, LeaveService>();
+
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -31,6 +32,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors(x => x
+           .AllowAnyOrigin()
+           .AllowAnyMethod()
+           .AllowAnyHeader());
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

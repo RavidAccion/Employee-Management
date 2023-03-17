@@ -1,5 +1,5 @@
 ﻿using Employee_Management.Interface;
-using Employee_Management.models;
+using EmployeeModel;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
@@ -19,7 +19,7 @@ namespace Employee_Management.Controllers
 
         [HttpPost]
         [Route("createLeave")]
-        public IActionResult Add(leavesModel data)
+        public IActionResult Add(LeavesModel data)
 
         {
             _leavData.Add(data);
@@ -28,7 +28,7 @@ namespace Employee_Management.Controllers
 
         [HttpPost]
         [Route("applyleave")]
-        public IActionResult applyleave(employee_leave_detaisl data)
+        public IActionResult applyleave(EmployeeLeaveDetails data)
            
         {
             var details = data;

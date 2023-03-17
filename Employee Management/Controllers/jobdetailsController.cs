@@ -1,5 +1,5 @@
 ﻿using Employee_Management.Interface;
-using Employee_Management.models;
+using EmployeeModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,7 +19,7 @@ namespace Employee_Management.Controllers
 
         [HttpPost]
         [Route("create")]
-        public IActionResult Add(Job_Details job)
+        public IActionResult Add(JobDetails job)
 
         {
             _jobData.Add(job);

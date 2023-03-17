@@ -1,22 +1,22 @@
-﻿using Employee_Management.models;
+﻿using EmployeeModel;
 
 namespace Employee_Management.Interface
 {
     public interface Ileave
     {
-        leavesModel Add(leavesModel data);
-        List<leavesModel> Getleavelist();
+        LeavesModel Add(LeavesModel data);
+        List<LeavesModel> Getleavelist();
 
-        List<employee_leave_detaisl> GetleaveDatas();
+        List<EmployeeLeaveDetails> GetleaveDatas();
 
-        employee_leave_detaisl applyleave(employee_leave_detaisl data);
-    
-        leavesModel GetLeave(int Id);
-        employee_leave_detaisl GetLeavebyid(int emp_id);
+        EmployeeLeaveDetails applyleave(EmployeeLeaveDetails data);
 
-        leaveResultset Getbyid(int data, employee_leave_detaisl details);
+        LeavesModel GetLeave(int Id);
+        EmployeeLeaveDetails GetLeavebyid(int emp_id);
 
-        employee_details Editleaves(employee_leave_detaisl data);
+        LeaveResultset Getbyid(int data, EmployeeLeaveDetails details);
+
+        EmployeeDetails Editleaves(EmployeeLeaveDetails data);
       
     }
 }

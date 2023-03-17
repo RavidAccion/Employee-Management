@@ -1,10 +1,10 @@
-﻿using Employee_Management.models;
+﻿using EmployeeModel;
 
 namespace Employee_Management.Interface
 {
     public interface Ijobdetails
     {
-        Job_Details Add(Job_Details job);
-        List<Job_Details> Get();
+        JobDetails Add(JobDetails job);
+        List<JobDetails> Get();
     }
 }

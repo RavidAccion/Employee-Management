@@ -1,18 +1,20 @@
 ﻿using Employee_Management.data;
 using Employee_Management.Interface;
-using Employee_Management.models;
+using Employee_Management.Repository;
+using EmployeeModel;
+using Employee_Management.Repository;
 
 namespace Employee_Management.Service
 {
     public class employeeService : Iemployees
     {
-        private readonly db _dbContext;
-        public employeeService(db dbContext)
+        private readonly DataBase _dbContext;
+        public employeeService(DataBase dbContext)
         {
             _dbContext = dbContext;
         }
 
-        public employee_details Add(employee_details emp)
+        public EmployeeDetails Add(EmployeeDetails emp)
         {
             _dbContext.employee_details.Add(emp);
             _dbContext.SaveChanges();
@@ -20,9 +22,18 @@ namespace Employee_Management.Service
             return emp;
         }
 
-        public List<employee_details> Get()
+        public List<EmployeeDetails> Get()
         {
             return _dbContext.employee_details.ToList();
+        }
+
+        public EmployeeDetails Getemployee(int emp_id)
+        {
+            var leave = _dbContext.employee_details.Find(emp_id);
+
+            return leave;
+
+
         }
     }
 }
